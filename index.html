@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>jambojetkenya</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#f5f5f5;}
+
+/* HEADER */
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 15px;
+    background:#fff;
+}
+.logo{color:#e6007e;font-weight:700;font-size:20px;}
+
+/* HERO */
+.hero{
+    position:relative;
+    height:260px;
+    overflow:hidden;
+}
+.slider{position:absolute;inset:0;}
+.slide{
+    position:absolute;
+    inset:0;
+    background-size:cover;
+    background-position:center;
+    opacity:0;
+    transition:opacity 1s ease-in-out;
+}
+.slide.active{opacity:1;}
+
+.overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(230,0,126,0.5);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding:40px 15px;
+    color:#fff;
+}
+
+/* ===== BOOKING FIXED ===== */
+.booking{
+    background:#e6007e;
+    width:95%;
+    max-width:650px;
+    margin:20px auto 25px;
+    border-radius:16px;
+    padding:18px;
+    color:#fff;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.row{
+    display:flex;
+    gap:10px;
+    margin-bottom:12px;
+    flex-wrap:wrap;
+}
+
+.input-group{
+    display:flex;
+    align-items:center;
+    background:#fff;
+    border-radius:10px;
+    padding:10px;
+    flex:1;
+    min-width:140px;
+}
+
+.input-group i{
+    font-size:18px;
+    color:#e6007e;
+    margin-right:6px;
+}
+
+.input-group input{
+    border:none;
+    outline:none;
+    width:100%;
+    font-size:13px;
+}
+
+.autocomplete-box{position:relative;flex:1;}
+
+.suggestions{
+    position:absolute;
+    top:45px;
+    left:0;
+    right:0;
+    background:#fff;
+    border-radius:10px;
+    max-height:180px;
+    overflow-y:auto;
+    display:none;
+    z-index:1000;
+}
+.suggestions div{
+    padding:10px;
+    font-size:13px;
+    color:#000;
+    cursor:pointer;
+}
+.suggestions div:hover{background:#f2f2f2;}
+
+/* SWAP */
+.swap{
+    background:#fff;
+    color:#e6007e;
+    width:38px;
+    height:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    cursor:pointer;
+}
+
+/* SUBMIT */
+.search{
+    background:#a6d600;
+    color:#000;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:12px;
+    border-radius:10px;
+    cursor:pointer;
+    width:100%;
+}
+
+/* ===== OFFERS RESTORED FULL ===== */
+.offers{
+    padding:15px;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.offer-card{
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    background:#fff;
+}
+
+.offer-card img{
+    width:100%;
+    height:160px;
+    object-fit:cover;
+}
+
+.offer-text{
+    padding:15px;
+}
+
+.offer-text h2{
+    color:#e6007e;
+    margin-bottom:5px;
+}
+
+.offer-text h3{
+    margin-bottom:8px;
+}
+
+.offer-text p{
+    font-size:13px;
+    margin-bottom:10px;
+}
+
+.offer-card.pink{
+    background:linear-gradient(135deg,#e6007e,#ff4da6);
+    color:#fff;
+}
+
+.offer-card.pink h2{color:#fff;}
+
+.pink-btn{
+    background:#e6007e;
+    color:#fff;
+    border:none;
+    padding:10px;
+    border-radius:8px;
+    font-weight:600;
+}
+
+.yellow-btn{
+    background:#ffd600;
+    border:none;
+    padding:10px;
+    border-radius:8px;
+    font-weight:700;
+}
+
+.offer-text ul{
+    font-size:13px;
+    padding-left:18px;
+}
+
+/* FOOTER */
+footer{
+    background:#111;
+    color:#ccc;
+    padding:30px 15px;
+    margin-top:30px;
+}
+.footer-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:20px;
+}
+.footer h3{color:#fff;font-size:14px;margin-bottom:8px;}
+.footer p,.footer a{font-size:12px;color:#ccc;text-decoration:none;}
+.copy{
+    text-align:center;
+    margin-top:20px;
+    font-size:11px;
+    color:#888;
+}
+
+/* MOBILE */
+@media(max-width:480px){
+.hero{height:220px;}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div>☰</div>
+<div class="logo">jambojetkenya</div>
+<div>👤</div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+<div class="slider">
+<div class="slide active" style="background-image:url('take.jfif');"></div>
+<div class="slide" style="background-image:url('conferm.png');"></div>
+<div class="slide" style="background-image:url('more.jfifS');"></div>
+</div>
+
+<div class="overlay"></div>
+
+<div class="hero-content">
+
+</div>
+</section>
+
+<!-- BOOKING -->
+<div class="booking">
+
+<div class="row">
+
+<div class="autocomplete-box">
+<div class="input-group">
+<i class='bx bx-plane-take-off'></i>
+<input id="from" placeholder="From" readonly onclick="openDropdown('fromList')">
+</div>
+<div id="fromList" class="suggestions"></div>
+</div>
+
+<div class="swap" onclick="swapCities()">
+<i class='bx bx-transfer'></i>
+</div>
+
+<div class="autocomplete-box">
+<div class="input-group">
+<i class='bx bx-plane-land'></i>
+<input id="to" placeholder="To" readonly onclick="openToDropdown()">
+</div>
+<div id="toList" class="suggestions"></div>
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="input-group">
+<i class='bx bx-calendar'></i>
+<input type="date" id="date">
+</div>
+
+<div class="input-group">
+<i class='bx bx-user'></i>
+<input id="passengers" placeholder="Passengers">
+</div>
+
+</div>
+
+<div class="row">
+<div class="search" onclick="submitBooking()">
+<i class='bx bx-send'></i> SUBMIT BOOKING
+</div>
+</div>
+
+</div>
+
+<!-- OFFERS (FULL RESTORED 3 CARDS) -->
+<section class="offers">
+
+<!-- JM REWARDS -->
+<div class="offer-card">
+<img src="rewards.jfif">
+<div class="offer-text">
+<h2>jmRewards</h2>
+<h3>Fly More, Earn More!</h3>
+<p>Join JM Rewards and turn your trips into points, perks, and exclusive benefits.</p>
+<button class="pink-btn">SIGN UP NOW >></button>
+</div>
+</div>
+
+<!-- JAZA POLE POLE -->
+<div class="offer-card pink">
+<img src="jaza.jfif">
+<div class="offer-text">
+<h2>JAZA Pole Pole</h2>
+<p>Secure a flight with only <b>KES 3,000</b> and pay the balance in instalments.</p>
+<button class="yellow-btn">BOOK NOW >></button>
+</div>
+</div>
+
+<!-- DESTINATIONS -->
+<div class="offer-card">
+<img src="destinations.jfif">
+<div class="offer-text">
+<h2>Explore Destinations</h2>
+<ul>
+<li>Nairobi (JKIA)</li>
+<li>Mombasa, Kisumu, Eldoret</li>
+<li>Zanzibar, Lamu, Malindi</li>
+</ul>
+</div>
+</div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+<div class="footer-grid">
+
+<div>
+<h3>jambojetkenya</h3>
+<p>Affordable regional flights across East Africa.</p>
+</div>
+
+<div>
+<h3>Contact</h3>
+<p>+254 781 799 922</p>
+<p>jambojetkenya299@gmail.com</p>
+</div>
+
+<div>
+<h3>Links</h3>
+<a href="#">Book Flight</a><br>
+<a href="#">Manage Booking</a><br>
+<a href="#">Support</a>
+</div>
+
+</div>
+
+<div class="copy">© 2026 jambojetkenya</div>
+</footer>
+
+<script>
+let slides=document.querySelectorAll(".slide"),i=0;
+setInterval(()=>{
+slides[i].classList.remove("active");
+i=(i+1)%slides.length;
+slides[i].classList.add("active");
+},4000);
+
+const airports=[
+"UKA - Diani","EDL - Eldoret","KIS - Kisumu","LAU - Lamu",
+"MYD - Malindi","MBA - Mombasa","NBO - Nairobi (JKIA)","ZNZ - Zanzibar"
+];
+
+function openDropdown(id){
+let list=document.getElementById(id);
+list.innerHTML="";
+airports.forEach(a=>{
+let d=document.createElement("div");
+d.textContent=a;
+d.onclick=()=>{from.value=a;list.style.display="none";};
+list.appendChild(d);
+});
+list.style.display="block";
+}
+
+function openToDropdown(){
+if(!from.value){alert("Select departure first");return;}
+let list=document.getElementById("toList");
+list.innerHTML="";
+airports.forEach(a=>{
+if(a!==from.value){
+let d=document.createElement("div");
+d.textContent=a;
+d.onclick=()=>{to.value=a;list.style.display="none";};
+list.appendChild(d);
+}
+});
+list.style.display="block";
+}
+
+function swapCities(){
+let t=from.value;
+from.value=to.value;
+to.value=t;
+}
+
+document.addEventListener("click",e=>{
+document.querySelectorAll(".suggestions").forEach(b=>{
+if(!b.parentElement.contains(e.target)) b.style.display="none";
+});
+});
+
+function submitBooking(){
+if(!from.value||!to.value){
+alert("Select route");
+return;
+}
+
+let msg=`Flight Booking%0AFrom: ${from.value}%0ATo: ${to.value}%0ADate: ${date.value}%0APassengers: ${passengers.value}`;
+
+window.open(`https://wa.me/254781799922?text=${msg}`,"_blank");
+}
+</script>
+
+</body>
+</html>
